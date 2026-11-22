@@ -18,17 +18,17 @@ const $$ = s => document.querySelectorAll(s);
   let msgIdx = 0;
 
   (async function loop() {
-    await sleep(1000);
+    await sleep(800);
     for (;;) {
       const text = messages[msgIdx % messages.length];
       for (let i = 1; i <= text.length; i++) {
         el.textContent = text.slice(0, i);
-        await sleep(90 + Math.random() * 30);
+        await sleep(85 + Math.random() * 30);
       }
       await sleep(2200);
       for (let i = text.length; i >= 0; i--) {
         el.textContent = text.slice(0, i);
-        await sleep(40);
+        await sleep(35);
       }
       await sleep(400);
       msgIdx++;
@@ -49,10 +49,9 @@ const $$ = s => document.querySelectorAll(s);
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('in');
-        io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.05, rootMargin: '80px' });
   els.forEach(e => io.observe(e));
 })();
 
@@ -86,12 +85,10 @@ const $$ = s => document.querySelectorAll(s);
 })();
 
 // ==========================================
-// 4. AUDIO SYSTEM & INTRO HOOK
+// 4. AUDIO SYSTEM CONTROLLER
 // ==========================================
 const AudioController = (function() {
   const audio = $('#bgMusic');
-  const hook = $('#introHook');
-  const startBtn = $('#startSurpriseBtn');
   const bar = $('#musicBar');
   const disc = $('#musicDisc');
   const toggleBtn = $('#musicToggleBtn');
@@ -101,7 +98,6 @@ const AudioController = (function() {
   let synthAudioCtx = null;
   let synthTimer = null;
 
-  // Web Audio API romantic music box synth fallback if mp3 is missing
   function startMusicBoxSynth() {
     if (synthActive) return;
     try {
@@ -110,7 +106,6 @@ const AudioController = (function() {
       synthAudioCtx = new AudioCtx();
       synthActive = true;
 
-      // Notes of a dreamy romantic Happy Birthday melody (in frequencies Hz)
       const melody = [
         { f: 261.63, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 293.66, d: 0.8 }, { f: 261.63, d: 0.8 }, { f: 349.23, d: 0.8 }, { f: 329.63, d: 1.4 },
         { f: 261.63, d: 0.4 }, { f: 261.63, d: 0.4 }, { f: 293.66, d: 0.8 }, { f: 261.63, d: 0.8 }, { f: 392.00, d: 0.8 }, { f: 349.23, d: 1.4 },
@@ -128,7 +123,6 @@ const AudioController = (function() {
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(note.f, synthAudioCtx.currentTime);
 
-        // Music box bell chime envelope
         gain.gain.setValueAtTime(0.001, synthAudioCtx.currentTime);
         gain.gain.linearRampToValueAtTime(0.18, synthAudioCtx.currentTime + 0.04);
         gain.gain.exponentialRampToValueAtTime(0.0001, synthAudioCtx.currentTime + note.d);
@@ -167,7 +161,6 @@ const AudioController = (function() {
           updateUI(true);
         })
         .catch(() => {
-          // If mp3 file is not found or blocked, fall back to music box synth
           console.log('Audio file not found or blocked, activating music box synth...');
           startMusicBoxSynth();
           isPlaying = true;
@@ -198,22 +191,6 @@ const AudioController = (function() {
     }
   }
 
-  // Hook button click
-  if (startBtn) {
-    startBtn.addEventListener('click', () => {
-      play();
-      if (hook) hook.classList.add('hidden');
-      if (typeof confetti === 'function') {
-        const cols = ['#ffd27a', '#ff7eb6', '#7fe7ff', '#ffffff', '#e83e8c'];
-        confetti({ particleCount: 160, spread: 100, origin: { y: 0.3 }, colors: cols });
-        setTimeout(() => {
-          confetti({ particleCount: 100, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: cols });
-          confetti({ particleCount: 100, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: cols });
-        }, 300);
-      }
-    });
-  }
-
   if (bar) {
     bar.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -225,27 +202,143 @@ const AudioController = (function() {
 })();
 
 // ==========================================
-// 5. HERO IMAGE FALLBACK
+// 5. INTRO HOOK & MEME CAT VIDEO (LEFT TO RIGHT)
 // ==========================================
 (function() {
-  const heroImg = $('#heroImg');
-  if (!heroImg) return;
-  heroImg.addEventListener('error', function() {
-    // If assets/hero.jpg is missing, pick the first photo from PHOTOS_DATA
-    if (window.PHOTOS_DATA && window.PHOTOS_DATA.photos && window.PHOTOS_DATA.photos.length > 0) {
-      // Find a good photo from the list
-      const candidate = window.PHOTOS_DATA.photos.find(p => p.includes('PORTRAIT') || p.includes('IMG')) || window.PHOTOS_DATA.photos[0];
-      if (candidate && heroImg.src !== candidate) {
-        heroImg.src = candidate;
-        return;
-      }
+  const hook = $('#introHook');
+  const startBtn = $('#startSurpriseBtn');
+  const videoOverlay = $('#introVideoOverlay');
+  const videoStage = $('#introVideoStage');
+  const introVideo = $('#introMemeVideo');
+  const skipBtn = $('#skipIntroVideoBtn');
+
+  if (!startBtn || !videoOverlay || !introVideo) return;
+
+  let introEnded = false;
+
+  function finishIntroVideo() {
+    if (introEnded) return;
+    introEnded = true;
+
+    try {
+      introVideo.pause();
+    } catch (e) {}
+
+    // Animate moving from center to the right
+    if (videoStage) {
+      videoStage.classList.remove('in-view');
+      videoStage.classList.add('exit-right');
     }
-    heroImg.src = 'assets/hero-placeholder.svg';
+
+    setTimeout(() => {
+      videoOverlay.classList.remove('active');
+
+      // START background music ONLY when the first video ends
+      AudioController.play();
+
+      // Confetti burst
+      if (typeof confetti === 'function') {
+        const cols = ['#ffd27a', '#ff7eb6', '#7fe7ff', '#ffffff', '#e83e8c'];
+        confetti({ particleCount: 160, spread: 100, origin: { y: 0.3 }, colors: cols });
+        setTimeout(() => {
+          confetti({ particleCount: 100, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: cols });
+          confetti({ particleCount: 100, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: cols });
+        }, 300);
+      }
+    }, 700);
+  }
+
+  startBtn.addEventListener('click', () => {
+    // Hide intro hook modal
+    if (hook) hook.classList.add('hidden');
+
+    // Make sure background music is NOT playing while video is on
+    AudioController.pause();
+
+    // Show video overlay
+    videoOverlay.classList.add('active');
+
+    // Slide in from left
+    setTimeout(() => {
+      if (videoStage) videoStage.classList.add('in-view');
+    }, 40);
+
+    // Play video with audio
+    introVideo.currentTime = 0;
+    introVideo.muted = false;
+    const playPromise = introVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.warn('Unmuted video play blocked, attempting muted:', err);
+        introVideo.muted = true;
+        introVideo.play().catch(() => finishIntroVideo());
+      });
+    }
+  });
+
+  introVideo.addEventListener('ended', finishIntroVideo);
+  introVideo.addEventListener('error', finishIntroVideo);
+  if (skipBtn) skipBtn.addEventListener('click', finishIntroVideo);
+})();
+
+// ==========================================
+// 6. PARTY SECTION & END VIDEO MODAL
+// ==========================================
+(function() {
+  const partyBtn = $('#partyBtn');
+  const partyModal = $('#partyModal');
+  const partyCloseBtn = $('#partyCloseBtn');
+  const endVideo = $('#endVideoPlayer');
+
+  if (!partyBtn || !partyModal || !endVideo) return;
+
+  partyBtn.addEventListener('click', () => {
+    // PAUSE background music while party video plays
+    AudioController.pause();
+
+    // Open party modal
+    partyModal.classList.add('open');
+
+    // Play party video with sound
+    endVideo.currentTime = 0;
+    endVideo.muted = false;
+    const playPromise = endVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        endVideo.muted = true;
+        endVideo.play();
+      });
+    }
+
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 150, spread: 120, origin: { y: 0.5 } });
+    }
+  });
+
+  function closeParty() {
+    try {
+      endVideo.pause();
+    } catch (e) {}
+    partyModal.classList.remove('open');
+
+    // Resume background music after party video closes
+    AudioController.play();
+  }
+
+  if (partyCloseBtn) partyCloseBtn.addEventListener('click', closeParty);
+  partyModal.addEventListener('click', e => {
+    if (e.target === partyModal) closeParty();
+  });
+
+  endVideo.addEventListener('ended', () => {
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
+    }
   });
 })();
 
 // ==========================================
-// 6. MEME AGE REALITY CHECKER (MARATHI)
+// 7. MEME AGE REALITY CHECKER (MARATHI)
 // ==========================================
 (function() {
   const btns = $$('.calc-btn');
@@ -276,16 +369,10 @@ const AudioController = (function() {
 })();
 
 // ==========================================
-// 7. CAKE CUTTING & WISHES
+// 8. CAKE CUTTING & WISHES
 // ==========================================
 (function() {
   const cols = ['#ffd27a', '#ff7eb6', '#7fe7ff', '#ffffff', '#e83e8c'];
-  const boom = () => {
-    if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 100, origin: { y: 0.2 }, colors: cols });
-  };
-  if (document.readyState === 'complete') setTimeout(boom, 800);
-  else addEventListener('load', () => setTimeout(boom, 800));
-
   const msg = $('#wishMsg');
   const lines = [
     '✨ Wish locked in the stars! Chetan will make sure it comes true ❤️',
@@ -326,7 +413,7 @@ const AudioController = (function() {
 })();
 
 // ==========================================
-// 8. DYNAMIC 62 PHOTOS GALLERY & AUTO-SHUFFLE
+// 9. DYNAMIC 62 PHOTOS GALLERY & AUTO-SHUFFLE
 // ==========================================
 (function() {
   const stack = $('#stack');
@@ -369,11 +456,9 @@ const AudioController = (function() {
   let timer = null;
   let currentIdx = 0;
 
-  // Retrieve photo list from window.PHOTOS_DATA or fallback
   if (window.PHOTOS_DATA && Array.isArray(window.PHOTOS_DATA.photos) && window.PHOTOS_DATA.photos.length > 0) {
     photoList = [...window.PHOTOS_DATA.photos];
   } else {
-    // Default 62 items
     photoList = Array.from({ length: 62 }, (_, i) => `assets/${i + 1}.jpg`);
   }
 
@@ -383,7 +468,6 @@ const AudioController = (function() {
     if (!stack || n === 0) return;
     stack.innerHTML = '';
 
-    // Render a window of polaroids: current, -1, +1, -2, +2
     const offsets = [-2, -1, 0, 1, 2];
     offsets.forEach(offset => {
       const photoIdx = ((currentIdx + offset) % n + n) % n;
@@ -410,13 +494,6 @@ const AudioController = (function() {
         <figcaption>${cap}</figcaption>
       `;
 
-      // Fallback for image load error
-      const img = fig.querySelector('img');
-      img.addEventListener('error', function() {
-        this.src = 'assets/hero-placeholder.svg';
-      });
-
-      // Click on center card opens Lightbox
       fig.addEventListener('click', () => {
         if (offset === 0) {
           openLightbox(photoSrc, cap);
@@ -461,7 +538,6 @@ const AudioController = (function() {
     }
   }
 
-  // Controls
   if (nextBtn) nextBtn.onclick = () => userGo(1);
   if (prevBtn) prevBtn.onclick = () => userGo(-1);
   if (shuffleBtn) shuffleBtn.onclick = shufflePhotos;
@@ -481,14 +557,12 @@ const AudioController = (function() {
     };
   }
 
-  // Keyboard navigation
   addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') userGo(1);
     if (e.key === 'ArrowLeft') userGo(-1);
     if (e.key === 'Escape' && lightbox && lightbox.classList.contains('open')) closeLightbox();
   });
 
-  // Touch Swipe Gesture
   let sx = null;
   stack.addEventListener('pointerdown', e => { sx = e.clientX; });
   stack.addEventListener('pointerup', e => {
@@ -501,7 +575,6 @@ const AudioController = (function() {
   });
   stack.addEventListener('pointercancel', () => { sx = null; });
 
-  // Lightbox functions
   function openLightbox(src, cap) {
     if (!lightbox || !lightboxImg) return;
     lightboxImg.src = src;
@@ -521,26 +594,26 @@ const AudioController = (function() {
     });
   }
 
-  // Initialize
   renderStack();
   resetAutoTimer();
 })();
 
 // ==========================================
-// 9. FINAL FLIP CARD (CHETAN'S LETTER)
+// 10. FINAL FLIP CARD (CHETAN'S LETTER)
 // ==========================================
 (function() {
   const card = $('#card');
+  const toggleBtn = $('#toggleButton');
+  const cardContainer = $('#cardContainer');
+
   const flip = () => {
     if (card) {
       card.classList.toggle('flipped');
       if (card.classList.contains('flipped') && typeof confetti === 'function') {
-        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        confetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
       }
     }
   };
-  const toggleBtn = $('#toggleButton');
-  const cardContainer = $('#cardContainer');
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', e => {

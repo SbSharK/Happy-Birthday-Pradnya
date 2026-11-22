@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- Audio Player -->
+<!-- Audio Player (Plays background song) -->
 <audio id="bgMusic" src="assets/music.mp3" preload="auto" loop></audio>
 
 <!-- Background Visuals -->
@@ -23,7 +23,7 @@
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="hills" aria-hidden="true"></div>
 
-<!-- Intro Hook (Opening Screen & Music Gesture) -->
+<!-- Intro Hook (Opening Screen & Volume Prompt) -->
 <div class="intro-hook" id="introHook" role="dialog" aria-modal="true" aria-label="Welcome surprise">
   <div class="hook-card">
     <span class="hook-badge">💌 Special Delivery</span>
@@ -35,6 +35,20 @@
     <button class="hook-btn" id="startSurpriseBtn" type="button">
       <span>Unwrap Birthday Magic ✨</span>
     </button>
+  </div>
+</div>
+
+<!-- Intro Meme Cat Video Overlay (Sliding Left to Right) -->
+<div class="intro-video-overlay" id="introVideoOverlay" role="dialog" aria-modal="true" aria-label="Intro meme video">
+  <div class="intro-video-stage" id="introVideoStage">
+    <div class="intro-video-header">
+      <span class="intro-video-title">🐱 A Special Birthday Wish For You! 🎂</span>
+      <button class="skip-btn" id="skipIntroVideoBtn" type="button">Skip to Surprise ⏩</button>
+    </div>
+    <div class="video-frame">
+      <video id="introMemeVideo" src="assets/intro-meme.mp4" playsinline preload="auto"></video>
+    </div>
+    <div class="intro-video-caption">Listen to this special meme cat wish! 😸✨</div>
   </div>
 </div>
 
@@ -51,7 +65,7 @@
   
   <div class="portrait tilt" data-depth="1">
     <div class="portrait-inner">
-      <img id="heroImg" src="assets/hero.jpg" alt="Birthday Queen Pradnya">
+      <img id="heroImg" src="assets/hero.jpg" onerror="this.onerror=null;this.src='assets/PXL_20250615_103255713.PORTRAIT.jpg'" alt="Birthday Queen Pradnya">
     </div>
     <i class="spark s1">✦</i>
     <i class="spark s2">✧</i>
@@ -72,16 +86,16 @@
 </header>
 
 <main>
-  <!-- Section 1: Romantic Letter from Chetan -->
+  <!-- Section 1: Romantic Letter from Chetan (Always Visible & Beautiful) -->
   <section class="wrap" id="letter" data-r>
     <div class="letter tilt">
       <span class="heart" aria-hidden="true">❤️</span>
       <h2>Hey, Pradnya 💕</h2>
-      <p style="--d:.1s">hi, it's <strong>Chetan</strong> 🍂</p>
-      <p style="--d:.25s">wishing you the happiest, most magical <mark>birthday in the universe 🎉</mark></p>
-      <p style="--d:.4s">I created this little corner of the internet just for you, to celebrate all the laughter and memories we share 🍁</p>
-      <p style="--d:.55s">may your year ahead be full of sunshine, endless love, and sweet giggles 🌺</p>
-      <p style="--d:.7s"><em>P.S. Scroll down... I have a very serious calculation about your age to settle once and for all 🧐👇</em></p>
+      <p>hi, it's <strong>Chetan</strong> 🍂</p>
+      <p>wishing you the happiest, most magical <mark>birthday in the universe 🎉</mark></p>
+      <p>I created this little corner of the internet just for you, to celebrate all the laughter and memories we share 🍁</p>
+      <p>may your year ahead be full of sunshine, endless love, and sweet giggles 🌺</p>
+      <p><em>P.S. Scroll down... I have a very serious calculation about your age to settle once and for all 🧐👇</em></p>
       <div class="letter-sign">Forever Yours, Chetan ❤️</div>
     </div>
   </section>
@@ -196,8 +210,8 @@
     </div>
   </section>
 
-  <!-- Section 5: Final Romantic Card from Chetan -->
-  <section class="final wrap" data-r>
+  <!-- Section 5: Final Romantic Card from Chetan (Visible, Full Height & Flipable) -->
+  <section class="final wrap" id="finalCardSec" data-r>
     <h2 class="sec-title">A Letter From My Heart</h2>
     <p class="sec-subtitle">Tap the card to reveal my birthday letter to you 💌</p>
 
@@ -226,7 +240,35 @@
       </div>
     </div>
   </section>
+
+  <!-- Section 6: Party Section (Click Here to Party!) -->
+  <section class="party-sec wrap" id="partySection" data-r>
+    <div class="party-card">
+      <span class="party-badge">🍾 The Grand Finale</span>
+      <h2 class="sec-title party-title">Ready to Party? 🥳🎉</h2>
+      <p class="sec-subtitle party-sub">
+        Madam, 23 chi aso ki 30 chi... Aata officially party cha time zala ahe! 💃🕺
+      </p>
+      <button class="party-btn" id="partyBtn" type="button">
+        <span>🎉 Click Here to Party! 🍾💃</span>
+      </button>
+    </div>
+  </section>
 </main>
+
+<!-- Party Video Modal Overlay -->
+<div class="party-modal" id="partyModal" role="dialog" aria-modal="true" aria-label="Party video popup">
+  <div class="party-modal-box">
+    <div class="party-modal-header">
+      <span class="party-modal-title">🎉 Birthday Party Time with Pradnya! 🍾</span>
+      <button class="party-close-btn" id="partyCloseBtn" type="button" aria-label="Close party video">✕</button>
+    </div>
+    <div class="video-frame">
+      <video id="endVideoPlayer" src="assets/end-video.mp4" playsinline controls preload="auto"></video>
+    </div>
+    <div class="intro-video-caption">Dancing like forever 23! Turn it up! 💃🕺✨</div>
+  </div>
+</div>
 
 <!-- Lightbox Modal for Fullscreen Photo View -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview">

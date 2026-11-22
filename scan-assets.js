@@ -16,7 +16,7 @@ try {
   const files = fs.readdirSync(assetsDir);
   photoFiles = files
     .filter(f => validExtensions.has(path.extname(f).toLowerCase()))
-    .filter(f => !f.startsWith('.') && f !== 'hero-placeholder.svg')
+    .filter(f => !f.startsWith('.') && f !== 'hero-placeholder.svg' && f !== 'hero.jpg' && f !== 'photos.json' && f !== 'photos-data.js')
     .sort((a, b) => {
       return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
     });

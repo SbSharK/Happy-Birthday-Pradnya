@@ -5,9 +5,9 @@
   --rose:#ff7eb6;
   --deep-rose:#e83e8c;
   --cyan:#7fe7ff;
-  --paper:#fff6ea;
-  --ink:#3b2a2f;
-  --card-dark:#201127;
+  --paper:#fff7ec;
+  --ink:#2c1b22;
+  --card-dark:#1d102b;
   --mx:0;
   --my:0;
 }
@@ -23,7 +23,7 @@ body{
   min-height:100vh;
 }
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-img,svg{max-width:100%;height:auto}
+img,svg,video{max-width:100%;height:auto}
 
 /* Background Atmosphere */
 .sky,.moon,.cloud,#bg,.hills{position:fixed;pointer-events:none}
@@ -39,7 +39,7 @@ img,svg{max-width:100%;height:auto}
   z-index:-5;
   right:8vw;
   top:8vh;
-  width:clamp(120px,26vw,250px);
+  width:clamp(110px,24vw,240px);
   aspect-ratio:1;
   border-radius:50%;
   background:radial-gradient(circle at 35% 35%,#fffdf0,#ffe5a3 55%,#ffbf7a);
@@ -85,9 +85,9 @@ img,svg{max-width:100%;height:auto}
   gap:10px;
   padding:8px 18px;
   border-radius:40px;
-  background:rgba(25,12,38,.75);
+  background:rgba(25,12,38,.85);
   backdrop-filter:blur(14px);
-  border:1px solid rgba(255,210,122,.45);
+  border:1.5px solid rgba(255,210,122,.5);
   box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 16px rgba(255,126,182,.3);
   font-family:'Gabriela',sans-serif;
   font-size:.9rem;
@@ -99,7 +99,6 @@ img,svg{max-width:100%;height:auto}
 .music-bar:hover{
   transform:scale(1.04);
   border-color:var(--gold);
-  box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 22px rgba(255,210,122,.5);
 }
 .disc{
   width:28px;
@@ -133,26 +132,27 @@ img,svg{max-width:100%;height:auto}
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:radial-gradient(circle at 50% 40%,rgba(38,15,58,.94) 0%,rgba(10,8,30,.98) 80%);
+  background:radial-gradient(circle at 50% 40%,rgba(38,15,58,.95) 0%,rgba(10,8,30,.98) 80%);
   backdrop-filter:blur(16px);
-  transition:opacity .85s cubic-bezier(.2,.8,.2,1),transform .85s cubic-bezier(.2,.8,.2,1);
+  transition:opacity .6s ease,transform .6s ease;
 }
 .intro-hook.hidden{
   opacity:0;
   pointer-events:none;
-  transform:scale(1.08);
+  transform:scale(1.05);
+  display:none;
 }
 .hook-card{
   position:relative;
   width:min(92vw,480px);
   background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
-  border:2px solid rgba(255,210,122,.5);
+  border:2px solid rgba(255,210,122,.55);
   border-radius:24px;
-  padding:42px 28px 36px;
+  padding:40px 24px 34px;
   text-align:center;
   box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(255,126,182,.35),inset 0 1px 1px rgba(255,255,255,.4);
   backdrop-filter:blur(20px);
-  animation:pop .9s cubic-bezier(.2,1.2,.3,1) both;
+  animation:pop .8s cubic-bezier(.2,1.2,.3,1) both;
 }
 .hook-badge{
   display:inline-block;
@@ -163,7 +163,7 @@ img,svg{max-width:100%;height:auto}
   font-size:.85rem;
   letter-spacing:1px;
   text-transform:uppercase;
-  margin-bottom:16px;
+  margin-bottom:14px;
   box-shadow:0 4px 14px rgba(232,62,140,.4);
 }
 .hook-card h1{
@@ -176,17 +176,17 @@ img,svg{max-width:100%;height:auto}
 .hook-card p{
   font-size:1.05rem;
   line-height:1.6;
-  color:rgba(255,255,255,.9);
+  color:rgba(255,255,255,.92);
   margin-bottom:20px;
 }
 .hook-hint{
-  font-size:.9rem !important;
-  color:var(--gold) !important;
+  font-size:.92rem;
+  color:var(--gold);
   display:flex;
   align-items:center;
   justify-content:center;
   gap:8px;
-  margin-bottom:28px !important;
+  margin-bottom:26px;
   animation:beat 2s ease-in-out infinite;
 }
 .hook-btn{
@@ -195,13 +195,13 @@ img,svg{max-width:100%;height:auto}
   align-items:center;
   justify-content:center;
   gap:10px;
-  padding:16px 38px;
+  padding:15px 36px;
   border-radius:40px;
   border:0;
   cursor:pointer;
   font-family:'Dancing Script',cursive;
   font-weight:700;
-  font-size:1.6rem;
+  font-size:1.55rem;
   color:#3a0822;
   background:linear-gradient(180deg,#fff2b5,#ffb86b 50%,#ff75a0 100%);
   box-shadow:0 8px 0 #b33966,0 20px 35px rgba(255,107,157,.55),inset 0 2px 2px rgba(255,255,255,.8);
@@ -217,16 +217,116 @@ img,svg{max-width:100%;height:auto}
   box-shadow:0 2px 0 #b33966,0 8px 16px rgba(255,107,157,.4);
 }
 
+/* ========================================================
+   INTRO CAT MEME VIDEO OVERLAY (Sliding from Left to Right)
+   ======================================================== */
+.intro-video-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:radial-gradient(circle at center,rgba(20,10,36,.96) 0%,rgba(6,3,15,.98) 100%);
+  backdrop-filter:blur(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .4s ease;
+}
+.intro-video-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.intro-video-stage{
+  position:relative;
+  width:min(94vw,720px);
+  background:linear-gradient(145deg,rgba(35,16,50,.95),rgba(20,8,30,.98));
+  border:2.5px solid var(--gold);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 45px rgba(255,126,182,.45);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  transform:translateX(-120vw);
+  transition:transform 0.85s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.intro-video-stage.in-view{
+  transform:translateX(0);
+}
+
+.intro-video-stage.exit-right{
+  transform:translateX(120vw) rotate(4deg);
+  opacity:0;
+  transition:transform 0.75s cubic-bezier(0.6, 0, 0.8, 0.3), opacity 0.75s ease;
+}
+
+.intro-video-header{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.intro-video-title{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.3rem,4.5vw,1.9rem);
+  font-weight:700;
+  color:#ffe8a3;
+  text-shadow:0 0 10px rgba(255,210,122,.6);
+}
+.skip-btn{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,210,122,.5);
+  color:#fff;
+  padding:6px 14px;
+  border-radius:20px;
+  font-family:'Gabriela',sans-serif;
+  font-size:.85rem;
+  cursor:pointer;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+.skip-btn:hover{
+  background:rgba(255,126,182,.3);
+  border-color:var(--rose);
+}
+
+.video-frame{
+  width:100%;
+  aspect-ratio:16/9;
+  max-height:56vh;
+  border-radius:14px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  border:1.5px solid rgba(255,255,255,.15);
+}
+.video-frame video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.intro-video-caption{
+  font-size:.95rem;
+  color:rgba(255,230,200,.9);
+  text-align:center;
+}
+
 /* Hero Section */
 .hero,main,.foot{position:relative;z-index:1}
 .tilt{transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
+
+/* Section visibility */
 [data-r]{
-  opacity:0;
-  transform:perspective(900px) rotateX(24deg) translateY(60px) scale(.94);
-  transform-origin:50% 100%;
-  transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.9,.25,1.1);
+  opacity:1;
+  transition:transform 0.8s cubic-bezier(.2,.9,.25,1.1);
 }
-[data-r].in{opacity:1;transform:none}
 
 .hero{
   min-height:100vh;
@@ -249,8 +349,8 @@ img,svg{max-width:100%;height:auto}
 
 .portrait{
   position:relative;
-  width:min(72vw,320px);
-  aspect-ratio:1/1;
+  width:min(72vw,300px);
+  aspect-ratio:4/5;
   margin-top:16px;
   animation:pop 1.2s .5s cubic-bezier(.2,1.2,.3,1) both;
 }
@@ -270,7 +370,7 @@ img,svg{max-width:100%;height:auto}
 .portrait::after{
   content:"";
   position:absolute;
-  inset:6% 3% 0;
+  inset:4% 2% 0;
   border-radius:50% 50% 28px 28px;
   border:3px solid rgba(255,230,170,.9);
   box-shadow:0 0 28px rgba(255,210,122,.85),inset 0 0 24px rgba(255,210,122,.45);
@@ -286,11 +386,13 @@ img,svg{max-width:100%;height:auto}
   transform:translateZ(60px);
   filter:drop-shadow(0 20px 24px rgba(20,0,50,.65));
   animation:bob 4s ease-in-out infinite;
+  background:#1a0f2b;
 }
 .portrait img{
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center 20%;
   display:block;
 }
 @keyframes bob{50%{translate:0 -12px}}
@@ -313,7 +415,7 @@ img,svg{max-width:100%;height:auto}
 .typewrap{
   font-family:'Cinzel Decorative',cursive;
   font-weight:700;
-  font-size:clamp(1.5rem,6.5vw,2.8rem);
+  font-size:clamp(1.4rem,6vw,2.7rem);
   min-height:1.4em;
   margin-top:24px;
   color:#fff;
@@ -343,18 +445,18 @@ img,svg{max-width:100%;height:auto}
 @keyframes shine{to{background-position:250% 0}}
 
 .hero-sub{
-  font-size:1.1rem;
-  color:rgba(255,230,190,.9);
+  font-size:1.05rem;
+  color:rgba(255,230,190,.92);
   margin-top:4px;
   animation:fadeup .9s 1.8s both;
 }
 .hero-tag{
   display:inline-block;
   margin-top:10px;
-  padding:4px 16px;
+  padding:5px 18px;
   border-radius:20px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,210,122,.35);
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,210,122,.4);
   font-size:.85rem;
   color:var(--gold);
   animation:fadeup .9s 2s both;
@@ -383,7 +485,7 @@ img,svg{max-width:100%;height:auto}
 @keyframes pulse{50%{transform:scaleY(.35) translateY(8px);opacity:.4}}
 
 /* Main Sections Layout */
-main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px 18px 80px;width:100%}
+main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px 16px 80px;width:100%}
 .wrap{display:flex;flex-direction:column;align-items:center;width:100%}
 .sec-title{
   font-family:'Cinzel Decorative',cursive;
@@ -394,34 +496,39 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
   text-shadow:1px 1px 0 #ff7eb6,2px 2px 0 #d64888,3px 3px 0 #8f2860,4px 6px 14px rgba(0,0,0,.5);
 }
 .sec-subtitle{
-  font-size:1rem;
-  color:rgba(255,235,210,.85);
+  font-size:1.05rem;
+  color:rgba(255,235,210,.9);
   text-align:center;
   margin-bottom:34px;
   font-style:italic;
+  padding:0 12px;
 }
 
-/* Section 1: Romantic Letter from Chetan */
+/* ========================================================
+   SECTION 1: ROMANTIC LETTER FROM CHETAN (100% VISIBLE)
+   ======================================================== */
 .letter{
   position:relative;
   width:min(92vw,580px);
   background:var(--paper);
   color:var(--ink);
-  padding:42px 34px 36px 46px;
+  padding:42px 30px 36px 44px;
   border-radius:10px 10px 24px 10px;
   box-shadow:0 2px 0 #e8d3b0,0 6px 0 #d9bd93,0 30px 50px rgba(20,0,50,.55);
   background-image:repeating-linear-gradient(transparent 0 33px,rgba(215,120,120,.18) 33px 34px);
   animation:hover3d 6s ease-in-out infinite;
+  opacity:1 !important;
+  visibility:visible !important;
 }
 @keyframes hover3d{50%{translate:0 -10px}}
 .letter::before{
   content:"";
   position:absolute;
-  left:32px;
+  left:30px;
   top:0;
   bottom:0;
   width:2px;
-  background:rgba(255,107,157,.45);
+  background:rgba(255,107,157,.5);
 }
 .letter h2{
   font-family:'Dancing Script',cursive;
@@ -434,18 +541,24 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
   font-size:1.1rem;
   line-height:34px;
   margin-bottom:8px;
+  color:#2c1b22;
+  opacity:1 !important;
+  transform:none !important;
+  visibility:visible !important;
 }
-.letter mark{background:linear-gradient(transparent 55%,rgba(255,200,87,.85) 55%);color:inherit;padding:0 2px}
+.letter mark{
+  background:linear-gradient(transparent 55%,rgba(255,200,87,.85) 55%);
+  color:inherit;
+  padding:0 2px;
+}
 .letter-sign{
   text-align:right;
   font-family:'Dancing Script',cursive;
   font-size:1.8rem;
   color:#b3395f;
-  margin-top:14px;
+  margin-top:16px;
   font-weight:700;
 }
-.letter p{opacity:0;transform:translateX(-24px);transition:opacity .7s var(--d),transform .7s var(--d)}
-.in .letter p{opacity:1;transform:none}
 
 .heart{
   position:absolute;
@@ -464,14 +577,14 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 }
 @keyframes beat{0%,100%{scale:1}14%{scale:1.18}28%{scale:1}42%{scale:1.12}}
 
-/* Section 2: Meme Age Section (Forever 23 vs 30 in Marathi) */
+/* Section 2: Meme Age Section */
 .meme-sec{width:100%}
 .meme-container{
   width:min(92vw,720px);
-  background:linear-gradient(160deg,rgba(40,18,60,.8),rgba(20,10,40,.9));
-  border:2px solid rgba(255,126,182,.4);
+  background:linear-gradient(160deg,rgba(40,18,60,.85),rgba(20,10,40,.92));
+  border:2px solid rgba(255,126,182,.45);
   border-radius:24px;
-  padding:32px 24px;
+  padding:32px 22px;
   box-shadow:0 24px 50px rgba(10,0,30,.6),0 0 30px rgba(255,126,182,.2);
   backdrop-filter:blur(14px);
 }
@@ -491,11 +604,11 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 }
 .meme-card:hover{transform:translateY(-4px)}
 .meme-card.her-claim{
-  background:linear-gradient(145deg,rgba(255,126,182,.18),rgba(255,126,182,.06));
+  background:linear-gradient(145deg,rgba(255,126,182,.2),rgba(255,126,182,.06));
   border:1.5px solid rgba(255,126,182,.45);
 }
 .meme-card.his-roast{
-  background:linear-gradient(145deg,rgba(255,210,122,.18),rgba(255,210,122,.06));
+  background:linear-gradient(145deg,rgba(255,210,122,.2),rgba(255,210,122,.06));
   border:1.5px solid rgba(255,210,122,.45);
 }
 .meme-header{
@@ -521,9 +634,9 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 .meme-dialogue{
   font-size:.98rem;
   line-height:1.5;
-  color:rgba(255,255,255,.9);
+  color:rgba(255,255,255,.92);
   font-style:italic;
-  background:rgba(0,0,0,.2);
+  background:rgba(0,0,0,.25);
   padding:10px 12px;
   border-radius:10px;
 }
@@ -538,8 +651,8 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
   display:flex;
   align-items:flex-start;
   gap:14px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
   border-radius:14px;
   padding:14px 18px;
   font-size:1rem;
@@ -552,7 +665,7 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 .age-calc-box{
   margin-top:24px;
   padding:20px;
-  background:rgba(0,0,0,.28);
+  background:rgba(0,0,0,.3);
   border-radius:16px;
   border:1px solid rgba(255,210,122,.3);
   text-align:center;
@@ -889,14 +1002,18 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
   place-items:center;
 }
 
-/* Section 5: Final Romantic Card */
-.final{perspective:1200px}
+/* ========================================================
+   SECTION 5: FINAL ROMANTIC CARD (FIXED HEIGHT & FULL VISIBILITY)
+   ======================================================== */
+.final{perspective:1200px;width:100%}
 .card-wrap{
-  width:min(92vw,480px);
-  min-height:440px;
+  width:min(92vw,500px);
+  height:500px;
   perspective:1500px;
   cursor:pointer;
   animation:hover3d 5s ease-in-out infinite;
+  margin:0 auto;
+  position:relative;
 }
 .card{
   position:relative;
@@ -909,16 +1026,19 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 .side{
   position:absolute;
   inset:0;
+  width:100%;
+  height:100%;
   -webkit-backface-visibility:hidden;
   backface-visibility:hidden;
   border-radius:24px;
-  padding:clamp(22px,5vw,36px) clamp(20px,5vw,30px);
+  padding:28px 24px;
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
   box-shadow:0 8px 0 rgba(120,30,80,.35),0 34px 50px rgba(10,0,40,.55);
   overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
 .front{
   background:linear-gradient(135deg,#ffe5ec,#ffb6c1 55%,#ff99cc);
@@ -928,48 +1048,174 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 .front h3{
   font-family:'Great Vibes',cursive;
   font-weight:400;
-  font-size:clamp(2.3rem,8vw,3.2rem);
+  font-size:clamp(2.4rem,8vw,3.4rem);
   text-shadow:0 0 6px rgba(255,77,136,.5);
 }
 .front p{
-  font-size:1.05rem;
+  font-size:1.1rem;
   color:#731738;
 }
 .front img{
   width:min(160px,36vw);
   flex:1;
   min-height:0;
-  margin:12px 0;
+  margin:10px 0;
   animation:bob 3s ease-in-out infinite;
 }
 .back{
   background:linear-gradient(135deg,#1f1338,#3a1b4e 55%,#261036);
   color:#fff;
-  border:2px solid rgba(255,210,122,.5);
+  border:2.5px solid rgba(255,210,122,.6);
   transform:rotateY(180deg);
   justify-content:center;
+  padding:32px 26px;
 }
 .back h3{
   font-family:'Great Vibes',cursive;
   font-weight:400;
-  font-size:clamp(2.2rem,7vw,2.8rem);
+  font-size:clamp(2.4rem,7.5vw,3rem);
   color:var(--gold);
-  margin-bottom:16px;
+  margin-bottom:14px;
   text-shadow:0 0 12px rgba(255,210,122,.6);
 }
 .back p{
-  font-size:clamp(.92rem,2.8vw,1.05rem);
+  font-size:clamp(1rem,2.8vw,1.1rem);
   line-height:1.65;
-  color:rgba(255,245,235,.95);
+  color:rgba(255,245,235,.98);
   margin-bottom:12px;
 }
 .back-sign{
   font-family:'Dancing Script',cursive;
-  font-size:1.6rem;
+  font-size:1.7rem;
   color:var(--rose);
   margin-top:10px;
   font-weight:700;
 }
+
+/* ========================================================
+   SECTION 6: PARTY SECTION & END VIDEO MODAL
+   ======================================================== */
+.party-sec{width:100%}
+.party-card{
+  width:min(92vw,620px);
+  background:linear-gradient(145deg,rgba(45,15,65,.9),rgba(20,8,38,.95));
+  border:2.5px solid var(--gold);
+  border-radius:28px;
+  padding:38px 24px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 45px rgba(255,210,122,.35);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+.party-badge{
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:30px;
+  background:linear-gradient(90deg,#ff4b4b,#ff8533);
+  color:#fff;
+  font-size:.9rem;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  box-shadow:0 4px 14px rgba(255,75,75,.4);
+}
+.party-title{
+  color:#ffe8a3 !important;
+  text-shadow:0 0 16px rgba(255,210,122,.7),0 3px 6px rgba(0,0,0,.7) !important;
+}
+.party-sub{
+  font-size:1.1rem !important;
+  margin-bottom:18px !important;
+}
+.party-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:16px 42px;
+  border-radius:45px;
+  border:0;
+  cursor:pointer;
+  font-family:'Dancing Script',cursive;
+  font-weight:700;
+  font-size:1.75rem;
+  color:#2b051a;
+  background:linear-gradient(180deg,#fff2b5,#ffb86b 45%,#ff4d88 100%);
+  box-shadow:0 8px 0 #b32a58,0 20px 35px rgba(255,77,136,.6),inset 0 2px 2px rgba(255,255,255,.8);
+  transition:all .18s ease;
+  animation:bob 2.8s ease-in-out infinite;
+}
+.party-btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 12px 0 #b32a58,0 26px 45px rgba(255,77,136,.7);
+}
+.party-btn:active{
+  transform:translateY(6px);
+  box-shadow:0 2px 0 #b32a58,0 8px 16px rgba(255,77,136,.4);
+}
+
+/* Party Video Popup Modal */
+.party-modal{
+  position:fixed;
+  inset:0;
+  z-index:9995;
+  background:rgba(5,2,12,.94);
+  backdrop-filter:blur(22px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease;
+}
+.party-modal.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.party-modal-box{
+  position:relative;
+  width:min(94vw,760px);
+  background:linear-gradient(145deg,rgba(35,12,50,.96),rgba(15,5,25,.98));
+  border:2.5px solid var(--rose);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 50px rgba(255,77,136,.4);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+.party-modal-header{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.party-modal-title{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.4rem,5vw,2rem);
+  color:#ffe8a3;
+  font-weight:700;
+}
+.party-close-btn{
+  background:rgba(255,255,255,.15);
+  border:0;
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  font-size:1.4rem;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:background .2s ease;
+}
+.party-close-btn:hover{background:rgba(255,126,182,.4)}
 
 /* Footer */
 .foot{
@@ -1006,25 +1252,32 @@ main{display:flex;flex-direction:column;align-items:center;gap:96px;padding:40px
 }
 @keyframes rise{to{transform:translate(var(--x),-115vh) rotate(8deg);opacity:0}}
 
-/* Responsive Breakpoints */
+/* ========================================================
+   RESPONSIVE BREAKPOINTS (Mobile & Tablet Friendly)
+   ======================================================== */
 @media (max-width:640px){
   .meme-grid{grid-template-columns:1fr;gap:14px}
   .meme-container{padding:22px 16px}
-  .card-wrap{min-height:480px}
+  .card-wrap{height:520px}
   .music-title{display:none}
+  .letter{padding:34px 22px 30px 32px}
+  .letter h2{font-size:2.1rem}
+  .letter p{font-size:1rem;line-height:30px}
+  .party-btn{font-size:1.5rem;padding:14px 28px}
 }
 @media (max-width:380px){
-  main{gap:64px;padding:32px 12px 56px}
-  .letter{padding:32px 20px 28px 30px}
-  .letter p{font-size:.98rem;line-height:28px}
+  main{gap:64px;padding:32px 10px 56px}
+  .letter{padding:30px 18px 26px 28px}
+  .letter p{font-size:.95rem;line-height:28px}
   .gallery-ctrl{gap:12px}
   .round{width:46px;height:46px;font-size:1.6rem}
+  .card-wrap{height:540px}
 }
 @media (max-height:520px) and (orientation:landscape){
   .hero{min-height:auto;padding:16px 16px 20px}
-  .portrait{width:min(34vw,200px)}
+  .portrait{width:min(34vw,190px)}
   .bunting{width:min(65vw,440px)}
-  .card-wrap{min-height:360px}
+  .card-wrap{height:420px}
   main{gap:56px}
 }
 @media (min-width:900px){
