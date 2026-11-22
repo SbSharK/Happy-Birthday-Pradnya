@@ -1,15 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Happy Birthday Munikrishna</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Dancing+Script:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="Css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Happy Birthday Pradnya ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+
+<!-- Audio Player -->
+<audio id="bgMusic" src="assets/music.mp3" preload="auto" loop></audio>
+
+<!-- Background Visuals -->
 <div class="sky" aria-hidden="true"></div>
 <div class="moon" aria-hidden="true"></div>
 <div class="cloud c1" aria-hidden="true"></div>
@@ -17,75 +23,231 @@
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="hills" aria-hidden="true"></div>
 
+<!-- Intro Hook (Opening Screen & Music Gesture) -->
+<div class="intro-hook" id="introHook" role="dialog" aria-modal="true" aria-label="Welcome surprise">
+  <div class="hook-card">
+    <span class="hook-badge">💌 Special Delivery</span>
+    <h1>Hey, Pradnya ❤️</h1>
+    <p>A little birthday surprise crafted with all my love (and a little bit of leg-pulling 😜) just for you!</p>
+    <div class="hook-hint">
+      <span>🎧 Turn your volume UP for the best experience!</span>
+    </div>
+    <button class="hook-btn" id="startSurpriseBtn" type="button">
+      <span>Unwrap Birthday Magic ✨</span>
+    </button>
+  </div>
+</div>
+
+<!-- Floating Music Controller Pill -->
+<div class="music-bar" id="musicBar" title="Click to play or pause music">
+  <div class="disc" id="musicDisc">🎵</div>
+  <span class="music-title" id="musicTitle">Our Song ❤️</span>
+  <button class="music-btn" id="musicToggleBtn" type="button" aria-label="Toggle music">▶</button>
+</div>
+
+<!-- Hero Section -->
 <header class="hero">
   <img class="bunting" src="img/banner.png" alt="Happy birthday bunting">
+  
   <div class="portrait tilt" data-depth="1">
-    <img src="img/user.png" alt="Munikrishna">
-    <i class="spark s1">✦</i><i class="spark s2">✧</i><i class="spark s3">✦</i><i class="spark s4">✧</i>
+    <div class="portrait-inner">
+      <img id="heroImg" src="assets/hero.jpg" alt="Birthday Queen Pradnya">
+    </div>
+    <i class="spark s1">✦</i>
+    <i class="spark s2">✧</i>
+    <i class="spark s3">✦</i>
+    <i class="spark s4">✧</i>
   </div>
-  <h1 class="typewrap" aria-live="polite"><span id="typewriter"></span><i class="cursor" aria-hidden="true"></i></h1>
-  <p class="hero-name">Munikrishna</p>
-  <a class="scroll-hint" href="#letter" aria-label="Scroll to your letter">scroll down</a>
+
+  <h1 class="typewrap" aria-live="polite">
+    <span id="typewriter"></span><i class="cursor" aria-hidden="true"></i>
+  </h1>
+  <p class="hero-name">Pradnya</p>
+  <p class="hero-sub">Happy Birthday to the girl who stole my heart 💕</p>
+  <span class="hero-tag">Handcrafted with all my love, Chetan ❤️</span>
+
+  <a class="scroll-hint" href="#letter" aria-label="Scroll down to letter">
+    <span>scroll down for surprises</span>
+  </a>
 </header>
 
 <main>
+  <!-- Section 1: Romantic Letter from Chetan -->
   <section class="wrap" id="letter" data-r>
     <div class="letter tilt">
       <span class="heart" aria-hidden="true">❤️</span>
-      <h2>Hey, Munikrishna</h2>
-      <p style="--d:.1s">hi, im <strong>murali</strong> 🍂</p>
-      <p style="--d:.25s">wishing you a very <mark>happy birthday 🎉</mark></p>
-      <p style="--d:.4s">ive created something special just for you, scroll down and enjoy the surprises! 🍁</p>
-      <p style="--d:.55s">may your day be filled with happiness, laughter, and sweet memories 🌺</p>
+      <h2>Hey, Pradnya 💕</h2>
+      <p style="--d:.1s">hi, it's <strong>Chetan</strong> 🍂</p>
+      <p style="--d:.25s">wishing you the happiest, most magical <mark>birthday in the universe 🎉</mark></p>
+      <p style="--d:.4s">I created this little corner of the internet just for you, to celebrate all the laughter and memories we share 🍁</p>
+      <p style="--d:.55s">may your year ahead be full of sunshine, endless love, and sweet giggles 🌺</p>
+      <p style="--d:.7s"><em>P.S. Scroll down... I have a very serious calculation about your age to settle once and for all 🧐👇</em></p>
+      <div class="letter-sign">Forever Yours, Chetan ❤️</div>
     </div>
   </section>
 
+  <!-- Section 2: The Meme Age Debate (Marathi in English script) -->
+  <section class="meme-sec wrap" id="ageDebate" data-r>
+    <h2 class="sec-title">The "Forever 23" Investigation 🕵️‍♀️🎂</h2>
+    <p class="sec-subtitle">Chetan vs Pradnya: The Great Age Mystery</p>
+
+    <div class="meme-container">
+      <div class="meme-grid">
+        <!-- Her Claim -->
+        <div class="meme-card her-claim">
+          <div class="meme-header">
+            <span>💅 Madam cha Claim</span>
+          </div>
+          <div class="meme-big">23 Years</div>
+          <p class="meme-dialogue">"Arey mi tar ajun lahan ahe re, fakt 23 chi ch diste ani 23 chi ch ahe! Chetan ugach chidvat asto mala!" 💁‍♀️✨</p>
+        </div>
+
+        <!-- His Roast -->
+        <div class="meme-card his-roast">
+          <div class="meme-header">
+            <span>🧐 Chetan's Fact-Check</span>
+          </div>
+          <div class="meme-big">30 Years!</div>
+          <p class="meme-dialogue">"Madam, 1998 cha birth ahe tumcha! Ganit visual kara jara... Aata officially 30 chya club madhe entry zaliye! Aaji zalisi tu! 😂👵"</p>
+        </div>
+      </div>
+
+      <!-- Dialogue Feed -->
+      <div class="meme-feed">
+        <div class="meme-item">
+          <span class="meme-emoji">📅</span>
+          <div class="meme-text">
+            <strong>Birth Certificate Fact:</strong> 1998 madhe janma zala hota baal! Calculator pan shock madhe ahe ki he 23 varsha aale kuthun? 🤣
+          </div>
+        </div>
+
+        <div class="meme-item">
+          <span class="meme-emoji">🩺</span>
+          <div class="meme-text">
+            <strong>Doctor:</strong> "Pradnya, your actual age?"<br>
+            <strong>Pradnya:</strong> "23 with 7 years of bonus experience!" 😂
+          </div>
+        </div>
+
+        <div class="meme-item">
+          <span class="meme-emoji">💬</span>
+          <div class="meme-text">
+            <strong>Dialogue of the Decade:</strong> "Age is just a number baby... pan 1998 pasun count kela ki number direct 30 ch disto!" 😜👵
+          </div>
+        </div>
+
+        <div class="meme-item">
+          <span class="meme-emoji">❤️</span>
+          <div class="meme-text">
+            <strong>Chetan's Final Truth:</strong> Swatahla 23 bolun kitihi firli, tari mazi leg-pulling kadhi sampnar nahi. Pan tu 23 chi aso ki 30 chi, mazya sathi tu kayam ti ch saglyat cute, sundar ani mazi favourite pagal ahes! 🥰
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Age Reality Check -->
+      <div class="age-calc-box">
+        <div class="age-calc-title">Pradnya's Age Reality-O-Meter 🕵️‍♂️</div>
+        <div class="age-calc-btns">
+          <button class="calc-btn" data-mode="23" type="button">Claim 23 (Pradnya Mode 🦄)</button>
+          <button class="calc-btn" data-mode="30" type="button">Accept 30 (Chetan Mode 👵)</button>
+          <button class="calc-btn" data-mode="love" type="button">Secret Truth ❤️</button>
+        </div>
+        <div class="calc-output" id="calcOutput">Tap an option above to run the official reality check! 👆</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Birthday Cake & Wish -->
   <section class="cake-sec wrap" data-r>
-    <div class="cake-stage"><span class="ring"></span><img class="cake" src="img/cake.svg" alt="Birthday cake"></div>
-    <button class="pill" id="wishBtn" type="button">Make a wish</button>
+    <div class="cake-stage">
+      <span class="ring"></span>
+      <img class="cake" src="img/cake.svg" alt="Birthday cake">
+    </div>
+    <button class="pill" id="wishBtn" type="button">Blow Candles & Make a Wish 🎂✨</button>
     <p class="wish" id="wishMsg" aria-live="polite"></p>
   </section>
 
-  <section class="memories wrap" data-r>
-    <h2 class="sec-title">Our old memories</h2>
-    <div class="stack" id="stack" aria-label="Photo memories">
-      <figure class="polaroid"><img src="img/1.jpg" alt="Group selfie" draggable="false"><figcaption>the squad</figcaption></figure>
-      <figure class="polaroid"><img src="img/2.jpg" alt="Friends in class" draggable="false"><figcaption>class break</figcaption></figure>
-      <figure class="polaroid"><img src="img/3.jpg" alt="Friends on the steps" draggable="false"><figcaption>bench gang</figcaption></figure>
-      <figure class="polaroid"><img src="img/4.jpg" alt="Friends lined up outside" draggable="false"><figcaption>all together</figcaption></figure>
+  <!-- Section 4: 62 Memories Gallery (Dynamic Stack & Auto-Shuffle Slideshow) -->
+  <section class="memories wrap" id="gallerySection" data-r>
+    <h2 class="sec-title">Our Precious Memories 📸❤️</h2>
+    <p class="sec-subtitle">62 beautiful moments with my favourite human</p>
+
+    <div class="stack-outer">
+      <div class="stack" id="stack" aria-label="Photo memories">
+        <!-- Dynamically rendered polaroids from assets/ -->
+      </div>
     </div>
-    <div class="ctrl">
-      <button id="prevImg" class="round" aria-label="Previous photo">‹</button>
-      <span id="count" class="count">1 / 4</span>
-      <button id="nextImg" class="round" aria-label="Next photo">›</button>
+
+    <div class="gallery-ctrl">
+      <div class="ctrl-group">
+        <button id="prevImg" class="round" aria-label="Previous photo">‹</button>
+        <span id="count" class="count">1 / 62</span>
+        <button id="nextImg" class="round" aria-label="Next photo">›</button>
+      </div>
+
+      <div class="extra-ctrls">
+        <button id="shuffleBtn" class="icon-btn" type="button">
+          <span>🔀 Shuffle</span>
+        </button>
+        <button id="autoPlayBtn" class="icon-btn active" type="button">
+          <span id="autoPlayText">⏸ Pause Auto-Slide</span>
+        </button>
+      </div>
     </div>
   </section>
 
+  <!-- Section 5: Final Romantic Card from Chetan -->
   <section class="final wrap" data-r>
-    <h2 class="sec-title">Final message</h2>
+    <h2 class="sec-title">A Letter From My Heart</h2>
+    <p class="sec-subtitle">Tap the card to reveal my birthday letter to you 💌</p>
+
     <div class="card-wrap tilt" id="cardContainer">
       <div class="card" id="card">
         <div class="side front">
           <h3>Happy Birthday</h3>
-          <p>Tap the button to open this card</p>
-          <img src="img/cake.svg" alt="">
-          <button class="pill dark" id="toggleButton" type="button">Open card</button>
+          <p>A special note from Chetan</p>
+          <img src="img/cake.svg" alt="Cake illustration">
+          <button class="pill dark" id="toggleButton" type="button">Open Card 💌</button>
         </div>
         <div class="side back">
-          <h3>Happy Birthday</h3>
-          <p>may your day be filled with love, laughter, and unforgettable moments. wishing you all the happiness your heart can hold. enjoy your special day to the fullest! may this year bring you endless joy, success, and beautiful surprises. happy birthday, celebrate big, smile brighter, and create memories that last forever!</p>
+          <h3>My Dearest Pradnya ❤️</h3>
+          <p>
+            On this special day, I want to remind you how deeply and truly you are loved.
+            You bring so much joy, laughter, craziness, and warmth into my world. Every smile of yours lights up my entire life!
+          </p>
+          <p>
+            Even though I will never stop pulling your leg about being born in 1998 and entering the big 30 club 😜, you will always be my sweetest, most precious, and most beautiful girl.
+          </p>
+          <p>
+            Thank you for being my rock, my best friend, and my endless happiness. May all your dreams come true this year!
+          </p>
+          <div class="back-sign">Happy Birthday, my love! Forever yours, Chetan 🌹</div>
         </div>
       </div>
     </div>
   </section>
 </main>
 
+<!-- Lightbox Modal for Fullscreen Photo View -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close preview">✕</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Memory preview">
+    <div class="lightbox-cap" id="lightboxCap"></div>
+  </div>
+</div>
+
 <footer class="foot" data-r>
-  <p>Thanks for visiting, stay awesome 🪔</p>
-  <small>Created with magical powers by Murali</small>
+  <p>Happy Birthday to My Forever Favourite Person 💖</p>
+  <small>Crafted with all my love by Chetan for Pradnya 🌹</small>
 </footer>
+
 <div id="lanterns" aria-hidden="true"></div>
+
+<!-- Photo Data & Core Scripts -->
+<script src="assets/photos-data.js"></script>
 <script src="background.js"></script>
 <script src="main.js"></script>
+
 </body>
 </html>

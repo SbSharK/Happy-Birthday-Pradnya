@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "name": "happy-birthday-pradnya",
+  "buildCommand": "node scan-assets.js",
+  "outputDirectory": "."
+}

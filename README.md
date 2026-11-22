@@ -1,62 +1,63 @@
-# Happy Birthday Website 
+# Happy Birthday Pradnya ❤️
 
-A simple and special **Happy Birthday Website** made with ❤️ for my friend.  
-
----
-
-## ✨ Tech Stack  
-<p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-  </p>
+A romantic, celebratory, and playful Happy Birthday website crafted with endless love by **Chetan** for **Pradnya**. 🎂✨
 
 ---
 
-## 🌐 Live Demo  
+## ✨ Features
 
-<p align="center">
-  <a href="https://itz-murali.github.io/Happy-Birthday-Animated/">
-    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-000000?style=for-the-badge&logo=github&logoColor=white" alt="Live Demo">
-  </a>
-</p>
-
----
-
-## 💡 About  
-🎀 This project is a **creative gift** made to celebrate a friend’s birthday online.  
-🎂 It’s simple, unique, and filled with festive vibes.  
-💻 Crafted with **HTML, CSS, and JS**, then brought to life on **Vercel**.  
+- 💌 **Magical Intro Hook**: A cinematic opening screen with background music unlock and interactive sound experience.
+- 🎵 **Floating Music Player**: Ambient background music player with spinning vinyl animation and playback controls.
+- 📸 **Dynamic Memory Slideshow (62 Photos)**: Automatically shuffles and displays 62 precious memory polaroids with smooth 3D stack perspective, swipe support, shuffle mode, and fullscreen lightbox view.
+- 🕵️‍♀️ **"Forever 23 vs Officially 30" Meme Section**: Hilarious Marathi dialogue (written in English script) roasting her famous claim of being 23 when she was born in 1998, complete with an interactive Age Reality-O-Meter!
+- 🎂 **Interactive Cake Cutting & Wishes**: Blow out candles to release fireworks, confetti showers, and glowing sky lanterns.
+- 💌 **3D Flip Love Letter**: A touching personal birthday letter from Chetan to Pradnya.
+- 🌌 **Dreamy Night Sky Visuals**: Shimmering stars, floating moon, shooting stars, and falling rose petals.
 
 ---
 
-## 🎁 Sneak Peek  
-Here’s a little glimpse of what it’s about:  
+## 📂 Project Structure
 
-> *“It’s more than just code — it’s happiness wrapped in a webpage!”* ✨  
-
----
-
-## 🔧 How to Customize for Your Friend  
-Want to make this birthday website for **your own friend**? 🎉 Just follow these steps:  
-
-1. **Fork this repository** 🍴  
-2. Open the `index.html` file and **replace the name** with your friend’s name.  
-3. Go to the **`img` folder** and replace the images with your own (photos, cake images, decorations, etc). 
-4. Deploy the site on *Vercel* or *Github pages* ( or any platform that you like).
-5. Share the link with your friend as a surprise gift 🎀  
-
----
-
-## 👨‍💻 Created By  
-**Murali** 🌟  
-
-<p align="center">
-  <a href="https://murali.vercel.app">
-    <img src="https://img.shields.io/badge/🌍%20My%20Portfolio-007ACC?style=for-the-badge&logo=google-chrome&logoColor=white" alt="My Portfolio">
-  </a>
-</p>
+```
+Happy-Birthday-Pradnya/
+├── assets/                  # Photos and music
+│   ├── photos.json          # Manifest of photo paths
+│   ├── photos-data.js       # Global JS photo list
+│   └── music.mp3            # Background music track
+├── Css/
+│   └── style.css            # Styles and animations
+├── img/
+│   ├── banner.png           # Birthday bunting banner
+│   └── cake.svg             # Cake illustration
+├── index.html               # Main website
+├── background.js            # Romantic canvas night sky & petals
+├── main.js                  # Audio, photo slider, memes & interactions
+├── scan-assets.js           # Asset scanner for dynamic photo detection
+├── vercel.json              # Vercel deployment configuration
+└── package.json             # Build scripts
+```
 
 ---
 
-🌸 *A little gift of code wrapped with happiness!* 🌸
+## 🚀 How to Add Photos & Music
+
+1. **Add Photos**:
+   - Place your photos inside the `assets/` folder.
+   - Run `node scan-assets.js` (or run `npm run build`) to automatically update `assets/photos.json` and `assets/photos-data.js`.
+   - The website dynamically adjusts to whatever number of photos you put in!
+
+2. **Add Music**:
+   - Place your music file as `assets/music.mp3`.
+   - When visitors tap **"Unwrap Birthday Magic"**, the music plays smoothly.
+
+---
+
+## 🌐 Deploying to Vercel
+
+1. Push your changes to the `main` branch on GitHub.
+2. Go to [Vercel](https://vercel.com) and import the `Happy-Birthday-Pradnya` repository.
+3. Click **Deploy**. Vercel will automatically run the build command (`node scan-assets.js`) and serve the site!
+
+---
+
+*Made with all my heart by Chetan for Pradnya 🌹*

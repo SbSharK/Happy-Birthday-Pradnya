@@ -1,0 +1,17 @@
+{
+  "name": "happy-birthday-pradnya",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Happy Birthday Pradnya - With Love from Chetan ❤️",
+  "scripts": {
+    "build": "node scan-assets.js",
+    "scan": "node scan-assets.js"
+  },
+  "keywords": [
+    "happy-birthday",
+    "pradnya",
+    "chetan"
+  ],
+  "author": "Chetan",
+  "license": "MIT"
+}
