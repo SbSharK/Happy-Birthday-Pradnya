@@ -348,7 +348,7 @@ const AudioController = (function() {
   const responses = {
     '23': `🚨 <strong>Error 404: 23 Not Found!</strong><br>Madam, 1998 te 2026 madhe 23 varsha kase hotat? Koni shikovla he maths? 😂 Still, your wish is granted... In your dreams you are forever 23! 🦄💅`,
     '30': `👵 <strong>Reality Check Passed! ✅</strong><br>Born 1998 = Officially 30 chya club madhe entry! Senior citizen discount unlocked! Aaji, sandhi-vaat cha ras aana lagel ata! Happy 30th Birthday! 😜🎂`,
-    'love': `❤️ <strong>Chetan's Secret Truth:</strong><br>Varsha kitihi vadhu de — 23 aso ki 30 — mazya sathi tu kayam ti ch saglyat cute, sundar ani mazi favourite pagal Pradnya rahnar ahes! I love you so much! 🥰🌹`
+    'love': `❤️ <strong>Chetan's Secret Truth:</strong><br>Varsha kitihi vadhu de — 23 aso ki 30 — mazya sathi tu kayam ti ch saglyat cute, sundar ani saglyat best person ahes.. I love you so much! 🥰🌹`
   };
 
   btns.forEach(btn => {
